@@ -1,0 +1,16 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+    \subsection{Generate and Load Data and Queries}
+    Data was created using dbgen by scale factor of 100 based on TPC-H standard. All data loaded from tbl format to postgres, parquet and orc in HDFS. Loading data to avro format was from parquet format. For loading data to hdfs, simple python script was wroted and submited to spark.\\
+    Queries Also edited under TPC-H circumstances.
+    
+    \subsection{Measurment Tools}
+    we used Dstat for log system status. Dstat is a light system resource statistics recorder. After these data were collected, they were aggregated to generate proper plots and statistics to analyze them.\\
+    Simple python script was written for postgres to submit query through $psql$, measure executaion time and record resource status.\\
+    For spark,  a supervisor app was devloped in scala and added hdfs support, system resource measurement tool and fixed some bugs. Complied supervisor app was submited to spark.\\
+
+    \href{https://github.com/erfan-mehraban/tpc-benchmark}{All codes including load scripts, queries and supervisor apps are pushed to corresponded repository}.\\
+
+\end{document}

@@ -1,0 +1,218 @@
+\documentclass[../../main.tex]{subfiles}
+
+\begin{document}
+    \begin{minipage}{.5\textwidth}
+        \begin{tikzpicture}
+            \begin{axis}[
+                smooth,
+                width=\textwidth,
+                title={CPU usage by {Q}},
+                xlabel={Time [sec]},
+                ylabel={CPU usage [\%]},
+                legend pos=north west,
+                ymajorgrids=true,
+                grid style=dashed,
+            ]
+                \addplot[
+                    color=blue
+                    ]
+                coordinates {
+                    {cpu_1}
+                };
+                \addlegendentry{run1}
+                \addplot[
+                    color=red
+                    ]
+                coordinates {
+                    {cpu_2}
+                };
+                \addlegendentry{run2}
+            \end{axis}
+        \end{tikzpicture}
+    \end{minipage}
+    \begin{minipage}{.5\textwidth}
+        \begin{tikzpicture}
+            \begin{axis}[
+                smooth,
+                width=\textwidth,
+                title={System Load in last 1 min},
+                xlabel={Time [sec]},
+                ylabel={System Load},
+                legend pos=north east,
+                ymajorgrids=true,
+                grid style=dashed,
+            ]
+                \addplot[
+                    color=blue
+                    ]
+                coordinates {
+                    {load_1}
+                };
+                \addlegendentry{run1}
+                \addplot[
+                    color=red
+                    ]
+                coordinates {
+                    {load_2}
+                };
+                \addlegendentry{run2}
+            \end{axis}
+        \end{tikzpicture}
+    \end{minipage}
+    \begin{minipage}{.5\textwidth}
+        \begin{tikzpicture}
+            \begin{axis}[
+                width=\textwidth,
+                title={Disk usage by {Q}},
+                xlabel={Time [sec]},
+                ylabel={Disk usage [MB/sec]},
+                legend pos=north east,
+                ymajorgrids=true,
+                grid style=dashed,
+            ]
+                \addplot[
+                    color=blue
+                    ]
+                coordinates {
+                    {disk_read_1}
+                };
+                \addlegendentry{run1 read}
+                \addplot[
+                    color=cyan
+                    ]
+                coordinates {
+                    {disk_write_1}
+                };
+                \addlegendentry{run1 write}
+                \addplot[
+                    color=red
+                    ]
+                coordinates {
+                    {disk_read_2}
+                };
+                \addlegendentry{run2 read}
+                \addplot[
+                    color=magenta
+                    ]
+                coordinates {
+                    {disk_write_2}
+                };
+                \addlegendentry{run2 write}
+            \end{axis}
+        \end{tikzpicture}
+    \end{minipage}
+    \begin{minipage}{.5\textwidth}
+        \begin{tikzpicture}
+            \begin{axis}[
+                width=\textwidth,
+                title={Overall Disk usage by {Q}},
+                xlabel={Time [sec]},
+                ylabel={Disk usage [MB/sec]},
+                legend pos=north east,
+                ymajorgrids=true,
+                grid style=dashed,
+            ]   
+                \addplot[
+                    color=blue
+                    ]
+                coordinates {
+                    {disk_1}
+                };
+                \addlegendentry{run1}
+                \addplot[
+                    color=red
+                    ]
+                coordinates {
+                    {disk_2}
+                };
+                \addlegendentry{run2}
+            \end{axis}
+        \end{tikzpicture}
+    \end{minipage}
+    \begin{minipage}{.5\textwidth}
+        \begin{tikzpicture}
+            \begin{axis}[
+                smooth,
+                width=\textwidth,
+                title={Memory+Swap usage by {Q}},
+                xlabel={Time [sec]},
+                ylabel={Memory used [MB]},
+                legend pos=south west,
+                ymajorgrids=true,
+                grid style=dashed,
+            ]
+                \addplot[
+                    color=blue
+                    ]
+                coordinates {
+                    {memory_1}
+                };
+                \addlegendentry{run1}
+                \addplot[
+                    color=red
+                    ]
+                coordinates {
+                    {memory_2}
+                };
+                \addlegendentry{run2}
+            \end{axis}
+        \end{tikzpicture}
+    \end{minipage}
+    \begin{minipage}{.5\textwidth}
+        \begin{tikzpicture}
+            \begin{axis}[
+                smooth,
+                width=\textwidth,
+                title={CPU Context Switch and Interrupt by {Q}},
+                xlabel={Time [sec]},
+                ylabel={count},
+                legend pos=north west,
+                ymajorgrids=true,
+                grid style=dashed,
+            ]
+                \addplot[
+                    color=blue
+                    ]
+                coordinates {
+                    {cs_1}
+                };
+                \addlegendentry{run1 context switches}
+                \addplot[
+                    color=cyan
+                    ]
+                coordinates {
+                    {interrupt_1}
+                };
+                \addlegendentry{run1 interrupt}
+                \addplot[
+                    color=red
+                    ]
+                coordinates {
+                    {cs_2}
+                };
+                \addlegendentry{run2 context switches}
+                \addplot[
+                    color=magenta
+                    ]
+                coordinates {
+                    {interrupt_2}
+                };
+                \addlegendentry{run2 interrupt}
+            \end{axis}
+        \end{tikzpicture}
+    \end{minipage}
+    \begin{table}
+        \begin{center}
+            \begin{tabular}{ |c|c|c|c| } 
+            \hline
+            Load & Memory & Disk IO & Execution Time\\
+            \hline
+            {load_avg} & {memory_avg} MB & {disk_io_avg} MB/sec & {execution_time} sec \\
+            \hline
+            \end{tabular}
+            \\[1pt]
+            \caption{Average Parametes over Runtime for {Q}}
+        \end{center}
+    \end{table}
+    \pagebreak
+\end{document}

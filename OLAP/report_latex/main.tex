@@ -1,0 +1,70 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.9}
+\usepackage{subfigure}
+\usepackage{subfiles}
+\usepackage[margin=1in,a4paper,tmargin=0.5in,bmargin=0.5in]{geometry}
+\usepackage{color}
+\usepackage{hyperref}
+\author{Erfan Mehraban}
+\title{OLAP DMBSs Analysis}
+
+\begin{document}
+    \maketitle
+
+    \subfile{introduction}
+    \subfile{configuration}
+    
+    \section{Performance Test}
+    TPC-H decision support benchmark was used, In order for  the results to be comparable and to be used in standard analysis.\\
+    In each performance test we measure and compare these parameters:
+    \begin{itemize}
+        \item
+        CPU usage: measured in percent of all core usage (which is equal to the sum user usage and waited tasks)
+        \item
+        CPU load: number of tasks in queue of CPU.
+        \item
+        CPU context switches and interrupt: A consistent parameter to measure dbms DBMS batch it's tasks.
+        \item
+        Memory: RAM usage plus Swap reserved by all process in system.
+        \item
+        Disk: bytes read or write from hard disk when DBMS is under the test.
+        \item
+        Execution Time: Total amount of running and returning result from DMBS to terminals which is measured in seconds.
+    \end{itemize}
+    Note that every test was ran on a single node so that the network won't effect the results.\\
+    TPC-H was applied benchmark to Postgres and spark. Spark was tested with HDFS and avro, parquet and orc file systems.\\
+    All tests has ran twice and compared for each run.\\
+    Scale factor for generating data was 100.
+    Out benchmark test skipped power test and refresh function test.
+    \pagebreak
+
+    \section{Postgres results}
+    Postgres were ran on single node without cluster and shm size set to 512MB.\\
+    Results of the first and the second run in postgres test has much diffrence with each other. Sometimes second run ends in $\frac{1}{6}$ first run and somtime viceversa. Also in some tests it seemed DBMS slow down itself and every measured parametes gets down for a while. It seemed envirment parameters are very effective on this DBMS.\\
+    Creating tables and loading all data (scale factor was 100) takes 13227 seconds.\\
+    \pagebreak
+    \subfile{query_charts/postgres/all}
+
+    \section{Spark results}
+    Spark has one worker and one master which ran on single node but dockerized on one network. Also hdfs used one namnode and one datanode as same condition. So networks will never be bottleneck.\\
+    Unlike postgres spark uses all the resources all the time and plot of CPU and memory shows steady growth or stable usage of processors. Also parameters of first and second run are very close in most of queries.\\
+
+    \subsection{Spark and Parquet}
+    \subfile{query_charts/spark_parquet/all}
+
+    \subsection{Spark and ORC}
+    \subfile{query_charts/spark_orc/all}
+
+    \subsection{Spark and Avro}
+    In some queries the first and the second run have massive diffrence. The run which uses more resources ends sooner so it can conclude other environment variables can effect on spark and avro integration.\\
+    Creating files in avro format and load data from parquet format took 2030 seconds which is 6 time faster than postgres.
+    \subfile{query_charts/spark_avro/all}
+    \section{Compare DMBSs}
+    \subfile{query_charts/compare}
+    \section{Run Technical Details}
+    \subfile{technical_detail}
+    \subfile{sponser}
+
+\end{document}

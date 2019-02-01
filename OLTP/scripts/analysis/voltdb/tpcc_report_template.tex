@@ -1,0 +1,135 @@
+\documentclass[../../main.tex]{subfiles}
+
+\begin{document}
+    \begin{minipage}{.5\textwidth}
+        \begin{tikzpicture}
+            \begin{axis}[
+                smooth,
+                width=\textwidth,
+                title={Total Throughput},
+                xlabel={Time [sec]},
+                ylabel={tpmc},
+                legend pos=north west,
+                ymajorgrids=true,
+                grid style=dashed,
+            ]
+                \addplot[
+                    color=blue
+                    ]
+                coordinates {
+                    {total_throughput}
+                };
+            \end{axis}
+        \end{tikzpicture}
+    \end{minipage}
+    \begin{minipage}{.5\textwidth}
+        \begin{tikzpicture}
+            \begin{axis}[
+                width=\textwidth,
+                title={Throughput for each transaction type},
+                xlabel={Time [sec]},
+                ylabel={tpmc},
+                legend pos=outer north east,
+                ymajorgrids=true,
+                grid style=dashed,
+            ]
+                \addplot[
+                    color=blue
+                    ]
+                coordinates {
+                    {stock_level_throughput}
+                };
+                \addlegendentry{SL}
+                \addplot[
+                    color=red
+                    ]
+                coordinates {
+                    {delivery_throughput}
+                };
+                \addlegendentry{D}
+                \addplot[
+                    color=green
+                    ]
+                coordinates {
+                    {order_status_throughput}
+                };
+                \addlegendentry{OS}
+                \addplot[
+                    color=violet
+                    ]
+                coordinates {
+                    {payment_throughput}
+                };
+                \addlegendentry{P}
+                \addplot[
+                    color=black
+                    ]
+                coordinates {
+                    {new_order_throughput}
+                };
+                \addlegendentry{NO}
+            \end{axis}
+        \end{tikzpicture}
+    \end{minipage}
+    \begin{minipage}{.5\textwidth}
+        \begin{tikzpicture}
+            \begin{axis}[
+                smooth,
+                width=\textwidth,
+                title={Average Latency},
+                xlabel={Time [sec]},
+                ylabel={Latency[milisecond]},
+                legend pos=north west,
+                ymajorgrids=true,
+                grid style=dashed,
+            ]
+                \addplot[
+                    color=blue
+                    ]
+                coordinates {
+                    {avg_latency_per_time}
+                };
+            \end{axis}
+        \end{tikzpicture}
+    \end{minipage}
+    \begin{minipage}{.5\textwidth}
+        \begin{center}
+            \begin{tabular}{ |c|c|c| } 
+                \hline
+                Transaction Type & Total Count & tpmc\\
+                \hline
+                Stock Level & {stock_level_total_txn} & {stock_level_tmp} \\
+                Delivery & {delivey_total_txn} & {delivey_tmp} \\
+                Order Status & {order_status_total_txn} & {order_status_tmp} \\
+                Payment & {payment_total_txn} & {payment_tmp} \\
+                New Order & {new_order_total_txn} & {new_order_tmp} \\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{minipage}
+    \begin{minipage}{\textwidth}
+        \begin{tikzpicture}
+            \begin{axis}[
+                width=\textwidth,
+                title={Response Time},
+                xlabel={RT [milisecond]},
+                ylabel={\#Transactions},
+                legend pos=north west,
+                ymajorgrids=true,
+                grid style=dashed,
+            ]
+                \addplot[
+                    color=blue
+                    ]
+                coordinates {
+                    {latency_per_rt}
+                };
+                \draw[gray, dashed] (axis cs: {latency_avg},0) -- 
+                (axis cs: {latency_avg},800)node[anchor=north,rotate=90]{Average};
+            \end{axis}
+        \end{tikzpicture}
+    \end{minipage}
+    Load Time in milisecond: {load_time} \\
+    more than 10 second latency transaction count: {timeout_txn} \\
+    \pagebreak
+\end{document}

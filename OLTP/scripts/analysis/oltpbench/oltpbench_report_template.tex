@@ -1,0 +1,114 @@
+\documentclass[../../main.tex]{subfiles}
+
+\begin{document}
+    \begin{minipage}{.5\textwidth}
+        \begin{tikzpicture}
+            \begin{axis}[
+                width=\textwidth,
+                title={Total Throughput},
+                xlabel={Time [sec]},
+                ylabel={tpmc},
+                legend pos=north west,
+                ymajorgrids=true,
+                grid style=dashed,
+            ]
+                \addplot[
+                    color=blue
+                    ]
+                coordinates {
+                    {total_throughput}
+                };
+            \end{axis}
+        \end{tikzpicture}
+    \end{minipage}
+    \begin{minipage}{.5\textwidth}
+        \begin{tikzpicture}
+            \begin{axis}[
+                width=\textwidth,
+                title={90th Percentile Response Time to Total Throughput},
+                xlabel={Throughput [tmpc]},
+                ylabel={Response Time[milisecond]},
+                legend pos=north west,
+                ymajorgrids=true,
+                grid style=dashed,
+            ]
+                \addplot[
+                    color=blue
+                    ]
+                coordinates {
+                    {resonsetime_per_throughput}
+                };
+                \draw[gray, dashed] (axis cs: {throughput_50th},0) -- 
+                (axis cs: {throughput_50th},80)node[anchor=north,rotate=90]{50th Percentile};
+                \draw[gray, dashed] (axis cs: {throughput_80th},0) -- 
+                (axis cs: {throughput_80th},80)node[anchor=north,rotate=90]{80th Percentile};
+                \draw[gray, dashed] (axis cs: {throughput_100th},0) -- 
+                (axis cs: {throughput_100th},80)node[anchor=north,rotate=90]{100th Percentile};
+            \end{axis}
+        \end{tikzpicture}
+    \end{minipage}
+    \begin{minipage}{.5\textwidth}
+        \begin{tikzpicture}
+            \begin{axis}[
+                width=\textwidth,
+                title={Average Latency},
+                xlabel={Time [sec]},
+                ylabel={Latency[milisecond]},
+                legend pos=north west,
+                ymajorgrids=true,
+                grid style=dashed,
+            ]
+                \addplot[
+                    color=blue
+                    ]
+                coordinates {
+                    {avg_latency_per_time}
+                };
+            \end{axis}
+        \end{tikzpicture}
+    \end{minipage}
+    \begin{minipage}{0.5\textwidth}
+        \begin{center}
+            \begin{tabular}{ |c|c|c| } 
+                \hline
+                Transaction Type & Total Count & tpmc\\
+                \hline
+                Stock Level & {stock_level_total_txn} & {stock_level_tmp} \\
+                Delivery & {delivey_total_txn} & {delivey_tmp} \\
+                Order Status & {order_status_total_txn} & {order_status_tmp} \\
+                Payment & {payment_total_txn} & {payment_tmp} \\
+                New Order & {new_order_total_txn} & {new_order_tmp} \\
+                \hline
+            \end{tabular}
+        \end{center}
+    \end{minipage}
+    \begin{minipage}{0.5\textwidth}
+        \begin{tikzpicture}
+            \begin{axis}[
+                width=\textwidth,
+                title={Response Time},
+                xlabel={RT [milisecond]},
+                ylabel={\#Transactions},
+                legend pos=north west,
+                ymajorgrids=true,
+                grid style=dashed,
+            ]
+                \addplot[
+                    color=blue
+                    ]
+                coordinates {
+                    {latency_per_rt}
+                };
+                \draw[gray, dashed] (axis cs: {latency_avg},0) -- 
+                (axis cs: {latency_avg},2000)node[anchor=north,rotate=90]{Average};
+                \draw[gray, dashed] (axis cs: {latency_90th},0) -- 
+                (axis cs: {latency_90th},2000)node[anchor=north,rotate=90]{90th Percentile};
+            \end{axis}
+        \end{tikzpicture}
+    \end{minipage}
+    \begin{minipage}{0.5\textwidth}
+        Load Time in milisecond: {load_time} \\
+        more than 100 second latency transaction count: {timeout_txn} \\
+    \end{minipage}
+    \pagebreak
+\end{document}

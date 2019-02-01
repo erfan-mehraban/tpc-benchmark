@@ -1,0 +1,16 @@
+rm /etc/apt/apt.conf.d/docker-gzip-indexes
+apt-get purge apt-show-versions
+rm /var/lib/apt/lists/*lz4
+apt-get -o Acquire::GzipIndexes=false update
+
+https://askubuntu.com/questions/430434/replace-openjdk-with-oracle-jdk-on-ubuntu
+(
+    update-alternatives --install "/usr/bin/java" "java" "/usr/local/java/jdk1.8.0_202/bin/java" 2000
+    update-alternatives --install "/usr/bin/javac" "javac" "/usr/local/java/jdk1.8.0_202/bin/javac" 2000
+    update-alternatives --install "/usr/bin/javaws" "javaws" "/usr/local/java/jdk1.8.0_202/bin/javaws" 2000
+    update-alternatives --set java /usr/local/java/jdk1.8.0_202/bin/java
+    update-alternatives --set javac /usr/local/java/jdk1.8.0_202/bin/javac
+    update-alternatives --set javaws /usr/local/java/jdk1.8.0_202/bin/javaws
+)
+
+apt install -y ant build-essential ant-optional python cmake valgrind ntp ccache git-arch git-completion git-core git-svn git-doc git-email python-httplib2 python-setuptools python-dev

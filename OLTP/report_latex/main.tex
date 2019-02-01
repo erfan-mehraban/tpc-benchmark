@@ -1,0 +1,83 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.9}
+\usepackage{subfigure}
+\usepackage{subfiles}
+\usepackage[margin=1in,a4paper,tmargin=0.5in,bmargin=0.5in]{geometry}
+\usepackage{color}
+\usepackage{hyperref}
+\author{Erfan Mehraban}
+\title{OLTP DMBSs Analysis}
+
+\begin{document}
+\maketitle
+\subfile{introduction}
+\subfile{configuration}
+  
+\section{Performance Test}
+TPC-C benchmark was used, In order for  the results to be comparable and to be used in standard analysis.\\
+In each performance test we measure and compare these parameters:
+\begin{itemize}
+    \item
+    CPU usage: measured in percent of all core usage (which is equal to the sum user usage and waited tasks)
+    \item
+    CPU load: number of tasks in queue of CPU.
+    \item
+    CPU context switches and interrupt: A consistent parameter to measure dbms DBMS batch it's tasks.
+    \item
+    Memory: RAM usage plus Swap reserved by all process in system.
+    \item
+    Disk: bytes read or write from hard disk when DBMS is under the test.
+    \item
+    Total Throughput: How many transactions ended successfuly in a period of time.
+    \item
+    Latency: How much time a transaction took to return the results.
+\end{itemize}
+Note that every test was ran on a single node so that the network won't effect the results.\\
+    Latency: How much time transaction taked to return the results.
+    TPC-C was applied benchmark to Postgres and Voltdb. All tests wete ran only once and target execution time was 2 hour, which may be longer or shorter due to runtime condition.\\
+
+    Runnig test in 3 modes and 6 scale factor causes at most 18 results which will be compared compare and explained later. Measured scale factors were 1, 2, 3, 5, 10, 100. \\
+    Out benchmark test skipped considering disk usage growth. \\
+    For Voltdb long transaction means transactions with latency more than 10 seconds but for postgres this limit is 100 seconds. The Reason is that overall transaction latency for postgres is higher than Voltdb. The reason will be explained further. \\
+
+    \begin{table}
+        \begin{center}
+            \begin{tabular}{ |c|c|c|c| } 
+                \hline
+                txn Type & High Read mode & Medium mode & High Write mode\\
+                \hline
+                New order & 40 & 40 & 30 \\
+                Payment & 25 & 45 & 40 \\
+                Order Status & 15 & 5 & 5 \\
+                Delivery & 5 & 5 & 20 \\
+                Stock Level & 15 & 5 & 5 \\
+                \hline
+            \end{tabular}
+            \\[1pt]
+            \caption{Transaction Type mix [\%] for mode}
+        \end{center}
+    \end{table}
+
+    \pagebreak
+
+\section{Voltdb results}
+    no
+    \subfile{voltdb_charts/all}
+    \subfile{voltdb_charts/compare}
+
+\section{Postgres results}
+    Postgres were ran on single node without cluster.\\
+    \subfile{postgre_charts/all}
+    \subfile{postgre_charts/compare}
+
+\section{Compare DMBSs}
+    \subfile{compare}
+
+\section{Test Technical Details}
+    \subfile{technical_detail}
+
+\subfile{sponser}
+
+\end{document}
