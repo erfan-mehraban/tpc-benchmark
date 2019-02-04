@@ -424,5 +424,4 @@ dmypy.json
 .history
 
 # End of https://www.gitignore.io/api/java,scala,latex,python,visualstudiocode
-OLTP/raw_reports_data/
-OLAP/raw_reports_data/
+*.csv

@@ -1,0 +1,14 @@
+run.sh: Performing client...
+--duration=7200 --warehouses=3 --displayinterval=10 --statsfile=/root/reports/3.stat
+Connecting to servers: localhost
+Connected.  Starting benchmark.
+start Loading:1548779357991
+Specified number of load threads exceeds number of warehouses. Setting former equal to latter.
+Loading warehouse 1
+Loading warehouse 3
+Loading warehouse 2
+log4j:WARN No appenders could be found for logger (HOST).
+log4j:WARN Please initialize the log4j system properly.
+log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
+Customer names tables broken into 3 chunks
+Connection to database host (localhost/127.0.0.1:21212) was lost before a response was received
