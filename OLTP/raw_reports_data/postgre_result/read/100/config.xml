@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<parameters>
+    <dbtype>postgres</dbtype>
+    <driver>org.postgresql.Driver</driver>
+    <DBUrl>jdbc:postgresql://localhost:5432/tpcc</DBUrl>
+    <DBName>tpcc</DBName>
+    <username>root</username>
+    <password>root</password>
+    <terminals>1000</terminals>
+
+    <scalefactor>100</scalefactor>
+
+    <transactiontypes>
+    	<transactiontype>
+    		<name>NewOrder</name>
+    		<id>1</id>
+    	</transactiontype>
+    	<transactiontype>
+    		<name>Payment</name>
+    		<id>2</id>
+    	</transactiontype>
+    	<transactiontype>
+    		<name>OrderStatus</name>
+    		<id>3</id>
+    	</transactiontype>
+    	<transactiontype>
+    		<name>Delivery</name>
+    		<id>4</id>
+    	</transactiontype>
+    	<transactiontype>
+    		<name>StockLevel</name>
+    		<id>5</id>
+    	</transactiontype>
+    </transactiontypes>
+
+    <works>
+        <work>
+          <time>7200</time>
+          <rate>200000</rate>
+          <weights>40,25,15,5,15</weights>
+        </work>
+    </works>
+
+</parameters>
